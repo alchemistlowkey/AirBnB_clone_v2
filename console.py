@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+import os
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -118,23 +119,31 @@ class HBNBCommand(cmd.Cmd):
         try:
             if not args:
                 raise SyntaxError()
-            split1 = args.split(' ')
-            new_instance = eval('{}()'.format(split1[0]))
-            params = split1[1:]
-            for param in params:
-                k, v = param.split('=')
-                try:
-                    attribute = HBNBCommand.verify_attribute(v)
-                except:
-                    continue
-                if not attribute:
-                    continue
-                setattr(new_instance, k, attribute)
-            new_instance.save()
-            print(new_instance.id)
+            my_list = args.split(" ")
+            obj = eval("{}()".format(my_list[0]))
+            for arg in my_list[1:]:
+                if "=" in arg:
+                    pair = arg.split("=")
+                    key = pair[0]
+                    value = pair[1]
+                    if value[0] == value[-1] == '"':
+                        value = value.replace("_", " ")
+                        value = value.split('"')[1]
+                        value = value.split('"')[0]
+                    else:
+                        try:
+                            value = int(value)
+                        except:
+                            try:
+                                value = float(value)
+                            except:
+                                continue
+                obj.__dict__[key] = value
+            obj.save()
+            print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
-        except NameError as e:
+        except NameError:
             print("** class doesn't exist **")
 
     def help_create(self):
