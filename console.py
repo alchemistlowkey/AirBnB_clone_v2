@@ -1,23 +1,24 @@
-#!/usr/bin/python3
-"""This is the console for AirBnB"""
-
+#!/usr/bin/env python3
+""" Console Module """
 import cmd
+import sys
 import os
-import models
 from datetime import datetime
 from models.base_model import BaseModel, Base
+from models import storage
 from models.user import User
+from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
-from models.place import Place
 from models.review import Review
 from shlex import split
 
 
 class HBNBCommand(cmd.Cmd):
-    """This class is the entry point of the command interpreter"""
+    """ Contains the functionality for the HBNB console"""
 
+    # determines prompt for interactive/non-interactive modes
     prompt = "(hbnb) "
     all_classes = {"BaseModel", "User", "State", "City",
                    "Amenity", "Place", "Review"}
@@ -248,7 +249,6 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
