@@ -3,9 +3,9 @@
 
 import cmd
 import os
-from models import storage
+import models
 from datetime import datetime
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from models.user import User
 from models.state import State
 from models.city import City
@@ -17,7 +17,7 @@ from shlex import split
 
 class HBNBCommand(cmd.Cmd):
     """This class is the entry point of the command interpreter"""
-    
+
     prompt = "(hbnb) "
     all_classes = {"BaseModel", "User", "State", "City",
                    "Amenity", "Place", "Review"}
@@ -248,6 +248,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
