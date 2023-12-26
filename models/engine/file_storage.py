@@ -74,3 +74,9 @@ class FileStorage:
         if data in FileStorage.__objects:
             del FileStorage.__objects[data]
             self.save()
+
+    def close(self):
+        """
+        Call reload() method for deserializing the JSON file to objects
+        """
+        self.reload()
