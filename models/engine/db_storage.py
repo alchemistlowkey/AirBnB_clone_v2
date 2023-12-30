@@ -10,7 +10,6 @@ from models.review import Review
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
 import os
-import mysql.connector
 
 
 user = os.getenv('HBNB_MYSQL_USER')
@@ -29,7 +28,7 @@ class DBStorage:
     def __init__(self):
         """Contructor for the class DBStorage"""
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
-            user, pwd, host, db), pool_pre_ping=False)
+            user, pwd, host, db), pool_pre_ping=True)
     if env == "test":
         Base.MetaData.drop_all()
 
