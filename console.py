@@ -19,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
-    prompt = "(hbnb) "
+    prompt = "(hbnb) " if sys.__stdin__.isatty() else ''
     all_classes = {"BaseModel", "User", "State", "City",
                    "Amenity", "Place", "Review"}
 
@@ -242,10 +242,11 @@ class HBNBCommand(cmd.Cmd):
         print(print_list)
 
     def do_quit(self, line):
-        return True
+        exit()
 
     def do_EOF(self, line):
-        return True
+        print()
+        exit()
 
     def emptyline(self):
         pass
