@@ -242,11 +242,11 @@ class HBNBCommand(cmd.Cmd):
         print(print_list)
 
     def do_quit(self, line):
-        exit()
+        return True
 
     def do_EOF(self, line):
         print()
-        exit()
+        return True
 
     def emptyline(self):
         pass
